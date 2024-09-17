@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: case_todo_app
+    volumes:
+      - ./app:/var/www/app
+    working_dir: /var/www/app
+    networks:
+      - case_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: case_todo_nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./app:/var/www/app
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    networks:
+      - case_network
+
+  db:
+    image: mysql:5.7
+    container_name: case_todo_db
+    platform: linux/amd64
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: todo_planning
+      MYSQL_USER: todo_user
+      MYSQL_PASSWORD: todo_password
+    ports:
+      - "3306:3306"
+    networks:
+      - case_network
+    volumes:
+      - ./mysql:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    container_name: todo_redis
+    networks:
+      - case_network
+
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: todo_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - case_network
+
+networks:
+  case_network:
+    driver: bridge
+
+volumes:
+  mysql:
