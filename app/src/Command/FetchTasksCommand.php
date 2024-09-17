@@ -22,7 +22,9 @@ class FetchTasksCommand extends Command
 
     protected function configure()
     {
-        $this->setDescription('Fetch tasks from providers');
+        $this
+            ->setDescription('Fetch tasks from providers')
+            ->setHelp('This command fetches tasks from providers asynchronously.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
@@ -31,7 +33,7 @@ class FetchTasksCommand extends Command
 
         $this->bus->dispatch(new FetchTasksMessage('Fetch tasks from providers'));
 
-        $io->success('Fetch tasks işlemi asenkron olarak başlatıldı.');
+        $io->success('Fetch tasks started...');
 
         return 0;
     }

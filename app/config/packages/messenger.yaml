@@ -2,7 +2,9 @@ framework:
     messenger:
         transports:
             async: '%env(MESSENGER_TRANSPORT_DSN)%'
+
         routing:
             'App\Messenger\Message\FetchTasksMessage': async
+            'App\Messenger\Message\DistributeJobsMessage': async
 
 
