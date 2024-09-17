@@ -1,19 +1,32 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Yeni Developer Ekle</h1>
-
-    {{ form_start(form) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.difficultyRate) }}
-    {{ form_row(form.capacity) }}
-
-    <button class="btn btn-success">Kaydet</button>
-    {{ form_end(form) }}
-
-    {% for message in app.flashes('success') %}
-        <div class="alert alert-success">
-            {{ message }}
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-success">New Developer</h5>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+                <div class="mb-3">
+                    {{ form_row(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Developer Name'}}) }}
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        {{ form_row(form.difficultyRate, {'attr': {'class': 'form-control', 'placeholder': 'Difficulty Rate'}}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(form.capacity, {'attr': {'class': 'form-control', 'placeholder': 'Capacity'}}) }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success">Kaydet</button>
+                {{ form_end(form) }}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success mt-3">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-    {% endfor %}
+    </div>
 {% endblock %}
