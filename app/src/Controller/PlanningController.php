@@ -25,10 +25,10 @@ class PlanningController extends AbstractController
      */
     public function index()
     {
-        // Redis cache'ini kontrol edip, planı alıyoruz
-        $plan = $this->cache->get('weekly_plan', function (ItemInterface $item) {
-            // We determine the cache duration (for example 1 hour)
-            $item->expiresAfter(3600);
+        // Redis cache control
+        $plan = $this->cache->get('weeklyPlan', function (ItemInterface $item) {
+            // cache duration (e.g. 5 minutes)
+            $item->expiresAfter(300);
 
             // We get the plan from the database and cache it
             return $this->getCurrentPlan();
@@ -45,9 +45,9 @@ class PlanningController extends AbstractController
     private function getCurrentPlan(): array
     {
         $assignments = $this->entityManager->getRepository(Assignment::class)->findAll();
-        $weeklyHours = 45; // Weekly working hour of each developer
+        $weeklyHours = 45;
         $plan = [];
-        $developerHours = []; // We will keep the remaining hours for each developer
+        $developerHours = []; // remaining hours for each developer
 
         foreach ($assignments as $assignment) {
             $developer = $assignment->getDeveloper()->getName();
