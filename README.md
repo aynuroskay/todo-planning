@@ -12,6 +12,9 @@ composer update</p>
 Queueleri aktif hale getirmek için<br>
 php bin/console messenger:consume async
 
+Developer eklemek için
+http://localhost:8080/developers
+
 <p>**Note: Localinizde messenger ack and nack hatası verir ise şöyle bir müdahale de bulunmak durumunda kaldım :/<br>
 case-todo-planning/app/vendor/symfony/messenger/Transport/AmqpExt/Connection.php<br>
 
