@@ -28,7 +28,7 @@ class DeveloperController extends AbstractController
             $entityManager->persist($developer);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Developer başarıyla eklendi!');
+            $this->addFlash('success', 'Developer created successfully!');
 
             return $this->redirectToRoute('developers');
         }

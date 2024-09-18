@@ -17,11 +17,11 @@
                 <tbody>
                 {% for developer, details in plan %}
                     <tr>
-                        <td colspan="5"><strong class="">{{ developer }}</strong> - Remaining Time: {{ details.remaining_hours }} hours</td>
+                        <td colspan="5"><i class="bi bi-person"></i> {{ developer }}  - Remaining Time: {{ details.remaining_hours }} hours <i class="bi bi-clock"></i></td>
                     </tr>
                     {% for task in details.tasks %}
                         <tr>
-                            <td></td>
+                            <td class="w-25"></td>
                             <td>{{ task.task }}</td>
                             <td>{{ task.provider }}</td>
                             <td>{{ task.duration }} hours</td>
