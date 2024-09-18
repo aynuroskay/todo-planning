@@ -9,6 +9,9 @@ docker compose up -d</p>
 docker compose exec php bash<br>
 composer update</p>
 
+<p>Database için<br>
+php bin/console doctrine:migrations:migrate</p> 
+
 Queueleri aktif hale getirmek için<br>
 php bin/console messenger:consume async
 
